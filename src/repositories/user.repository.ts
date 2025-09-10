@@ -1,5 +1,5 @@
 import prisma from '../prisma/client';
-import type { EntityUser } from '@prisma/client';
+import type { EntityUser } from '../generated/prisma';
 
 export class UserRepository {
   async createUser(data: { name: string; email: string }): Promise<EntityUser> {
