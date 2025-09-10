@@ -73,3 +73,5 @@ pids/
 
 # VS Code extension test host
 .vscode-test/
+
+/src/generated/prisma
