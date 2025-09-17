@@ -1,6 +1,7 @@
 // src/infrastructure/rabbitmq/consumer.ts
 import { getChannel } from "./rabbitmq";
 import { handleEvent } from "./eventDispatcher";
+import { Channel, ConsumeMessage } from "amqplib";
 
 const QUEUE_NAME = "orchestrator.queue";
 
@@ -10,12 +11,20 @@ export async function startConsumer() {
 
   console.log(`📥 Escuchando mensajes en ${QUEUE_NAME}...`);
 
+  interface Event {
+    // Define the expected structure of your event here
+    // For example:
+    // type: string;
+    // payload: any;
+    [key: string]: unknown;
+  }
+
   channel.consume(
     QUEUE_NAME,
-    async (msg) => {
+    async (msg: ConsumeMessage | null) => {
       if (msg) {
         try {
-          const event = JSON.parse(msg.content.toString());
+          const event: Event = JSON.parse(msg.content.toString());
           await handleEvent(event);
           channel.ack(msg);
         } catch (err) {

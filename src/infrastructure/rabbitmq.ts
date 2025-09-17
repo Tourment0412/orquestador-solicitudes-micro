@@ -1,41 +1,37 @@
-import amqp from "amqplib";
 
-const RABBIT_URL = "amqp://orchestrator:orchestrator_password@localhost:5672"; 
-const QUEUE_NAME = "orchestrator.queue";
+import { connect } from "amqplib";
 
-let channel: amqp.Channel;
+
+const RABBIT_URL = "amqp://orchestrator_user:orch_pass@localhost:5672";
+const QUEUE_NAME = "orquestador.queue";
+
+let connection: any;
+let channel: any;
+// Exponer la conexión si se necesita en otros módulos
+export function getConnection() {
+  if (!connection) throw new Error("❌ RabbitMQ no está conectado aún.");
+  return connection;
+}
 
 export async function connectRabbit() {
-  const conn = await amqp.connect(RABBIT_URL);
-  channel = await conn.createChannel();
+  if (channel) return channel;
+
+  connection = await connect(RABBIT_URL);   // 👈 ahora sí es un Connection
+  channel = await connection.createChannel();
+
   await channel.assertQueue(QUEUE_NAME, { durable: true });
-  console.log(`✔️ Conectado a RabbitMQ, escuchando la cola: ${QUEUE_NAME}`);
+
+  console.log(`✔️ Conectado a RabbitMQ (cola: ${QUEUE_NAME})`);
   return channel;
 }
 
-export function consumeMessages(onMessage: (msg: any) => void) {
-  if (!channel) throw new Error("RabbitMQ no está inicializado");
-  
-  channel.consume(
-    QUEUE_NAME,
-    (msg) => {
-      if (msg !== null) {
-        const content = msg.content.toString();
-        try {
-          const parsed = JSON.parse(content);
-          console.log("📥 Mensaje recibido:", parsed);
+export function getChannel() {
+  if (!channel) throw new Error("❌ RabbitMQ no está conectado aún.");
+  return channel;
+}
 
-          onMessage(parsed);
-
-          // Confirmar que el mensaje fue procesado
-          channel.ack(msg);
-        } catch (err) {
-          console.error("❌ Error procesando mensaje:", err);
-          // Rechazar y mandar a DLX si está configurado
-          channel.nack(msg, false, false);
-        }
-      }
-    },
-    { noAck: false }
-  );
+export async function closeRabbit() {
+  if (channel) await channel.close();
+  if (connection) await connection.close();
+  console.log("🔌 Conexión RabbitMQ cerrada.");
 }
