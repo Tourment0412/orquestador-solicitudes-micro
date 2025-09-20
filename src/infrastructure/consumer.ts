@@ -1,9 +1,9 @@
 // src/infrastructure/rabbitmq/consumer.ts
 import { getChannel } from "./rabbitmq";
 import { handleEvent } from "./eventDispatcher";
-import { Channel, ConsumeMessage } from "amqplib";
+import { ConsumeMessage } from "amqplib";
 
-const QUEUE_NAME = "orchestrator.queue";
+const QUEUE_NAME = "orquestador.queue"; // ajustado a definitions.json
 
 export async function startConsumer() {
   const channel = await getChannel();
@@ -11,29 +11,36 @@ export async function startConsumer() {
 
   console.log(`📥 Escuchando mensajes en ${QUEUE_NAME}...`);
 
-  interface Event {
-    // Define the expected structure of your event here
-    // For example:
-    // type: string;
-    // payload: any;
-    [key: string]: unknown;
-  }
-
-  channel.consume(
+  await channel.consume(
     QUEUE_NAME,
     async (msg: ConsumeMessage | null) => {
-      if (msg) {
+      if (!msg) return;
+
+      try {
+        const raw = msg.content.toString();
+        let parsed: unknown;
         try {
-          const event: Event = JSON.parse(msg.content.toString());
-          await handleEvent(event);
-          channel.ack(msg);
-        } catch (err) {
-          console.error("❌ Error procesando mensaje:", err);
-          channel.nack(msg, false, false); // rechazar
+          parsed = JSON.parse(raw);
+        } catch (e) {
+          // si no es JSON válido, lo dejamos como string
+          parsed = raw;
         }
+
+        // Imprimimos lo recibido (de forma legible)
+        console.log("📩 Mensaje recibido (raw):", raw);
+        console.log("📩 Mensaje recibido (parsed):", JSON.stringify(parsed, null, 2));
+
+        // Llamamos al dispatcher (en este caso sólo imprime)
+        await handleEvent(parsed);
+
+        // Confirmamos
+        channel.ack(msg);
+      } catch (err) {
+        console.error("❌ Error procesando mensaje:", err);
+        // Rechazamos sin requeue -> irá a DLX si la cola lo tiene configurado
+        channel.nack(msg, false, false);
       }
     },
     { noAck: false }
   );
 }
-
