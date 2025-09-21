@@ -2,6 +2,7 @@
 import { getChannel } from "./rabbitmq";
 import { handleEvent } from "./eventDispatcher";
 import { ConsumeMessage } from "amqplib";
+import { Evento } from '../models/evento.model';
 
 const QUEUE_NAME = "orquestador.queue"; // ajustado a definitions.json
 
@@ -17,23 +18,11 @@ export async function startConsumer() {
       if (!msg) return;
 
       try {
+        
         const raw = msg.content.toString();
         let parsed: unknown;
-        try {
-          parsed = JSON.parse(raw);
-        } catch (e) {
-          // si no es JSON válido, lo dejamos como string
-          parsed = raw;
-        }
-
-        // Imprimimos lo recibido (de forma legible)
-        console.log("📩 Mensaje recibido (raw):", raw);
-        console.log("📩 Mensaje recibido (parsed):", JSON.stringify(parsed, null, 2));
-
-        // Llamamos al dispatcher (en este caso sólo imprime)
-        await handleEvent(parsed);
-
-        // Confirmamos
+        const event: Evento = JSON.parse(msg.content.toString());
+        await handleEvent(event);
         channel.ack(msg);
       } catch (err) {
         console.error("❌ Error procesando mensaje:", err);
@@ -43,4 +32,5 @@ export async function startConsumer() {
     },
     { noAck: false }
   );
+
 }
