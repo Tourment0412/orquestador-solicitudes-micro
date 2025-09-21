@@ -7,7 +7,10 @@ import { getChannel } from "./rabbitmq";
  */
 export async function publishMessage(queue = "notifications.queue", message: any) {
   const channel = await getChannel();
-  await channel.assertQueue(queue, { durable: true });
+  await channel.assertQueue("notifications.queue", {
+    durable: true,
+    arguments: { "x-dead-letter-exchange": "dlx" }
+  });
 
   const payload = Buffer.from(JSON.stringify(message));
 

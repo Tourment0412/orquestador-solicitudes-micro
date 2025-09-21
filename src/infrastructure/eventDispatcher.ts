@@ -9,6 +9,10 @@ export async function handleEvent(event: Evento): Promise<void> {
       registroUsuario(event);
       break;
 
+    case "AUTENTICACION":
+      autenticacion(event);
+      break;
+
     case "RECUPERAR_PASSWORD":
       recuperacionContrasena(event);
       break;
@@ -16,11 +20,7 @@ export async function handleEvent(event: Evento): Promise<void> {
     case "AUTENTICACION_CLAVES":
       autenticacionClaves(event);
       break;
-
-    case "AUTENTICACION":
-      autenticacion(event);
-      break;
-
+      
     default:
       console.warn(`⚠️ Acción desconocida: ${event.tipoAccion}`);
       break;
