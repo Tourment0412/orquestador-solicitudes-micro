@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitud de Cambio de Contraseña</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .header {
+      background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+    .content {
+      padding: 30px;
+    }
+    .info-box {
+      background: #e2e3e5;
+      border: 1px solid #d6d8db;
+      color: #383d41;
+      padding: 20px;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    .verification-code {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 20px;
+      text-align: center;
+      margin: 20px 0;
+      letter-spacing: 3px;
+      font-weight: bold;
+      border: 1px dashed #6c757d;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #17a2b8;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .footer {
+      background: #f8f9fa;
+      padding: 15px;
+      text-align: center;
+      color: #6c757d;
+      font-size: 12px;
+    }
+    .timestamp {
+      color: #6c757d;
+      font-size: 13px;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="icon">🔒</div>
+      <h1>Solicitud de Cambio de Contraseña</h1>
+    </div>
+    <div class="content">
+      <p>Hola <strong>{{usuario}}</strong>,</p>
+      <p>Hemos recibido una solicitud para cambiar la contraseña de tu cuenta asociada al correo:</p>
+
+      <div class="info-box">
+        <p><strong>Usuario:</strong> {{usuario}}</p>
+        <p><strong>Email:</strong> {{correo}}</p>
+      </div>
+
+      <p>Para continuar con el proceso, utiliza el siguiente código de verificación:</p>
+      <div class="verification-code">{{codigo}}</div>
+
+      <div style="text-align: center; margin: 20px 0;">
+        <!-- Placeholder del enlace -->
+        <a href="{{reset_url}}" class="cta-button">Cambiar Contraseña</a>
+      </div>
+
+      <p style="font-size: 14px; color: #6c757d; margin-top: 20px;">
+        Si no solicitaste este cambio, ignora este mensaje. Tu contraseña actual seguirá funcionando normalmente.
+      </p>
+
+      <div class="timestamp">
+        Solicitud generada el {{fecha}}
+      </div>
+    </div>
+    <div class="footer">
+      <p>Este es un mensaje automático, por favor no respondas a este correo.</p>
+      <p>© 2025 Orquestador. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{subject}}</title>
+    <title>Notificación de Inicio de Sesión</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,7 +20,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .header {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -29,145 +29,68 @@
             margin: 0;
             font-size: 24px;
         }
-        .alert-icon {
+        .icon {
             font-size: 48px;
             margin-bottom: 15px;
         }
         .content {
             padding: 30px;
         }
-        .alert-box {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+        .info-box {
+            background: #e9f7ef;
+            border: 1px solid #c3e6cb;
+            color: #155724;
             padding: 20px;
             border-radius: 5px;
             margin: 20px 0;
         }
-        .alert-box h2 {
-            margin-top: 0;
-            color: #721c24;
-        }
-        .security-details {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        .action-required {
-            background: #d1ecf1;
-            border: 1px solid #bee5eb;
-            color: #0c5460;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        .cta-button {
-            display: inline-block;
-            background: #dc3545;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin: 20px 0;
+        .info-box p {
+            margin: 8px 0;
+            font-size: 16px;
         }
         .footer {
             background: #f8f9fa;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             color: #6c757d;
             font-size: 12px;
         }
         .timestamp {
             color: #6c757d;
-            font-size: 12px;
-            margin-top: 20px;
+            font-size: 13px;
+            margin-top: 15px;
             text-align: center;
-        }
-        .ip-info {
-            background: #e9ecef;
-            padding: 10px;
-            border-radius: 3px;
-            font-family: monospace;
-            margin: 10px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="alert-icon">🚨</div>
-            <h1>{{alert_title or 'Alerta de Seguridad'}}</h1>
+            <div class="icon">🔐</div>
+            <h1>Inicio de Sesión Exitoso</h1>
         </div>
         <div class="content">
-            <div class="alert-box">
-                <h2>⚠️ {{alert_type|title}}</h2>
-                <p><strong>Hola {{name}},</strong></p>
-                <p>{{message}}</p>
+            <p>Hola <strong>{{usuario}}</strong>,</p>
+            <p>Te informamos que se ha realizado un inicio de sesión correcto en tu cuenta.</p>
+
+            <div class="info-box">
+                <p><strong>Usuario:</strong> {{usuario}}</p>
+                <p><strong>Email:</strong> {{correo}}</p>
+                <p><strong>Fecha de acceso:</strong> {{fecha}}</p>
             </div>
-            
-            {% if security_details %}
-            <div class="security-details">
-                <h3>🔍 Detalles de Seguridad:</h3>
-                <ul>
-                    {% for key, value in security_details.items() %}
-                    <li><strong>{{key|title}}:</strong> {{value}}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            
-            {% if ip_address %}
-            <div class="security-details">
-                <h3>🌐 Información de Conexión:</h3>
-                <p><strong>Dirección IP:</strong></p>
-                <div class="ip-info">{{ip_address}}</div>
-                {% if location %}
-                <p><strong>Ubicación aproximada:</strong> {{location}}</p>
-                {% endif %}
-                {% if device_info %}
-                <p><strong>Dispositivo:</strong> {{device_info}}</p>
-                {% endif %}
-            </div>
-            {% endif %}
-            
-            {% if action_required %}
-            <div class="action-required">
-                <h3>⚡ Acción Requerida:</h3>
-                <p>{{action_required}}</p>
-                {% if action_url %}
-                <div style="text-align: center; margin: 20px 0;">
-                    <a href="{{action_url}}" class="cta-button">{{action_text or 'Tomar Acción'}}</a>
-                </div>
-                {% endif %}
-            </div>
-            {% endif %}
-            
-            {% if recommendations %}
-            <div class="action-required">
-                <h3>💡 Recomendaciones:</h3>
-                <ul>
-                    {% for rec in recommendations %}
-                    <li>{{rec}}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            
-            <div style="background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                <p><strong>🔒 Importante:</strong> Si no reconoces esta actividad, cambia tu contraseña inmediatamente y contacta a soporte.</p>
-            </div>
-            
+
+            <p style="font-size: 14px; color: #6c757d; margin-top: 20px;">
+                Si tú realizaste esta acción, no necesitas hacer nada más.  
+                Si no reconoces esta actividad, te recomendamos cambiar tu contraseña inmediatamente.
+            </p>
+
             <div class="timestamp">
-                Alerta generada el {{timestamp}} desde el Sistema de Seguridad
+                Notificación generada el {{fecha}}
             </div>
         </div>
         <div class="footer">
-            <p>Este es un mensaje de seguridad automático. Si tienes dudas, contacta a soporte.</p>
-            <p>© 2024 {{service_name or 'Sistema de Notificaciones'}}. Todos los derechos reservados.</p>
+            <p>Este es un mensaje automático, por favor no respondas a este correo.</p>
+            <p>© 2025 Orquestador. Todos los derechos reservados.</p>
         </div>
     </div>
 </body>
