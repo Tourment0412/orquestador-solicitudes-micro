@@ -28,6 +28,7 @@
     "amqplib": "^0.10.9",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
+    "handlebars": "^4.7.8",
     "morgan": "^1.10.1",
     "uuid": "^13.0.0",
     "zod": "^4.1.5"
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@types/amqplib": "^0.10.7",
     "@types/express": "^5.0.3",
+    "@types/handlebars": "^4.0.40",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.3.1",
     "@types/uuid": "^10.0.0",
