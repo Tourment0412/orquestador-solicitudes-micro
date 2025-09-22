@@ -6,12 +6,12 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  // output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://user:pass@localhost:5433/mydb?schema=public"
 }
 
 model EntityUser {
@@ -19,4 +19,15 @@ model EntityUser {
   name      String
   email     String   @unique
   createdAt DateTime @default(now())
+}
+
+model Evento {
+  id String  @id @default(uuid())   
+  tipoAccion String    
+  timestamp String    
+  usuario String
+  correo String
+  numeroTelefono String
+  codigo String
+  fecha DateTime
 }

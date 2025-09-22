@@ -3,8 +3,11 @@ import { CreateUserInput, User } from '../models/user.model';
 import { Evento } from '../models/evento.model';
 import { publishMessage } from "../infrastructure/publisher";
 import { UtilidadesService } from "./utilities.service";
+import {UserRepository} from '../repositories/user.repository';
+import { log } from 'console';
 
 const users: User[] = [];
+const repo = new UserRepository();
 
 function formatearFechaISO(iso: string, timeZone = "UTC"): string {
   const d = new Date(iso);
@@ -68,7 +71,7 @@ export async function getAllUsers(): Promise<User[]> {
 
 export async function registroUsuario(event: Evento) {
   console.log("registroUsuario");
-
+  guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
     email: event.payload.correo
@@ -85,7 +88,7 @@ export async function registroUsuario(event: Evento) {
 
 export async function autenticacion(event: Evento) {
   console.log("autenticacion");
-  
+  guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
     email: event.payload.correo,
@@ -105,7 +108,7 @@ export async function autenticacion(event: Evento) {
 
 export async function recuperacionContrasena(event: Evento) {
   console.log("recuperacionContrasena");
-
+  guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
     email: event.payload.correo
@@ -123,7 +126,7 @@ export async function recuperacionContrasena(event: Evento) {
 
 export async function autenticacionClaves(event: Evento) {
   console.log("autenticacionClaves");
-
+  guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
     email: event.payload.correo,
@@ -141,4 +144,23 @@ export async function autenticacionClaves(event: Evento) {
   });
 }
 
+export async function guardarEvento(evt: Evento) {
+  console.log(evt.payload);
+  const { usuario, correo, numeroTelefono, codigo, fecha } = evt.payload;
+  const fechaDate = new Date(fecha);
+  
+  const data = {
+    id: evt.id,
+    tipoAccion: evt.tipoAccion,
+    timestamp: evt.timestamp,
+    usuario,
+    correo,
+    numeroTelefono,
+    codigo,
+    fecha: fechaDate,
+  };
 
+  // Llamada al repo
+  const saved = await repo.createEvento(data);
+  return saved;
+}
