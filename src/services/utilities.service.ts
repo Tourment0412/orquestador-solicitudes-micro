@@ -26,4 +26,23 @@ export class UtilidadesService {
       throw error;
     }
   }
+
+
+    /**
+   * Genera un mensaje de texto (ej: SMS) reemplazando variables en la cadena
+   * @param templateString plantilla como string (ej: "Hola {{name}}, tu código es {{code}}")
+   * @param data objeto con las variables a reemplazar
+   */
+  static renderStringTemplate(templateString: string, data: Record<string, any>): string {
+    try {
+      // Compilar plantilla con Handlebars (sirve igual que para HTML)
+      const template = handlebars.compile(templateString);
+
+      // Generar el mensaje con los datos
+      return template(data);
+    } catch (error) {
+      console.error("❌ Error al renderizar la plantilla de cadena:", error);
+      throw error;
+    }
+  }
 }

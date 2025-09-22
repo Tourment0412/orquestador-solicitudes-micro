@@ -5,6 +5,7 @@ import { publishMessage } from "../infrastructure/publisher";
 import { UtilidadesService } from "./utilities.service";
 import {UserRepository} from '../repositories/user.repository';
 import { log } from 'console';
+import { MessageTemplates } from '../templates/messageTemplates';
 
 const users: User[] = [];
 const repo = new UserRepository();
@@ -83,7 +84,7 @@ export async function registroUsuario(event: Evento) {
       correo: event.payload.correo
     })
   },
-  subject: "Confirmacion de activacion de cuenta"
+  subject: MessageTemplates.SUBJECT_REGISTRATION
   });
 }
 
@@ -101,9 +102,13 @@ export async function autenticacion(event: Evento) {
       correo: event.payload.correo,
       fecha: formatearFechaGeneral(event.payload.fecha)
     }),
-    sms: "Mensaje de texto para SMS"
+    sms: UtilidadesService.renderStringTemplate(MessageTemplates.LOGIN_MESSAGE, {
+      usuario: event.payload.usuario,
+      correo: event.payload.correo,
+      fecha: formatearFechaGeneral(event.payload.fecha)
+    })
   },
-  subject: "Inicio de sesión realizado en la cuenta"
+  subject: MessageTemplates.SUBJECT_LOGIN
   });
 }
 
@@ -121,7 +126,7 @@ export async function recuperacionContrasena(event: Evento) {
       codigo: event.payload.codigo
     })
   },
-  subject: "Solicitud de Cambio de Contraseña"
+  subject: MessageTemplates.SUBJECT_PASSWORD_CHANGE_REQUEST
   });
 }
 
@@ -139,9 +144,13 @@ export async function autenticacionClaves(event: Evento) {
       correo: event.payload.correo,
       fecha: formatearFechaGeneral(event.payload.fecha)
     }),
-    sms: "Mensaje de texto para SMS"
+    sms: UtilidadesService.renderStringTemplate(MessageTemplates.PASSWORD_CHANGE_MESSAGE, {
+      usuario: event.payload.usuario,
+      correo: event.payload.correo,
+      fecha: formatearFechaGeneral(event.payload.fecha)
+    })
   },
-  subject: "Cambio de Contraseña"
+  subject: MessageTemplates.SUBJECT_PASSWORD_CHANGE
   });
 }
 
