@@ -8,6 +8,7 @@ import { log } from 'console';
 
 const users: User[] = [];
 const repo = new UserRepository();
+const undefinedToNull = <T>(v: T | undefined): T | null => (v === undefined ? null : v);
 
 function formatearFechaISO(iso: string, timeZone = "UTC"): string {
   const d = new Date(iso);
@@ -147,17 +148,26 @@ export async function autenticacionClaves(event: Evento) {
 export async function guardarEvento(evt: Evento) {
   console.log(evt.payload);
   const { usuario, correo, numeroTelefono, codigo, fecha } = evt.payload;
-  const fechaDate = new Date(fecha);
+  let fechaDate;
+  if (fecha !== undefined && fecha !== null) {
+    const parsed = new Date(fecha);
+    fechaDate = parsed;
+    if (!isNaN(parsed.getTime())) {
+      fechaDate = parsed;
+    } else {
+      throw new Error('fecha no es válida');
+    }
+  }
   
   const data = {
     id: evt.id,
     tipoAccion: evt.tipoAccion,
     timestamp: evt.timestamp,
     usuario,
-    correo,
-    numeroTelefono,
-    codigo,
-    fecha: fechaDate,
+    correo: undefinedToNull(correo),
+    numeroTelefono: undefinedToNull(numeroTelefono),
+    codigo: undefinedToNull(codigo),
+    fecha: undefinedToNull(fechaDate),
   };
 
   // Llamada al repo

@@ -22,12 +22,12 @@ model EntityUser {
 }
 
 model Evento {
-  id String  @id @default(uuid())   
-  tipoAccion String    
-  timestamp String    
-  usuario String
-  correo String
-  numeroTelefono String
-  codigo String
-  fecha DateTime
+  id            String   @id @default(uuid())
+  tipoAccion    String
+  timestamp     String
+  usuario       String       
+  correo        String?      
+  numeroTelefono String?
+  codigo        String?
+  fecha         DateTime?
 }

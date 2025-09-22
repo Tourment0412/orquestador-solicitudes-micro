@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "public"."Evento" ALTER COLUMN "correo" DROP NOT NULL,
+ALTER COLUMN "numeroTelefono" DROP NOT NULL,
+ALTER COLUMN "codigo" DROP NOT NULL,
+ALTER COLUMN "fecha" DROP NOT NULL;
