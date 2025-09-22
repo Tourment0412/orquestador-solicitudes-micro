@@ -73,15 +73,16 @@ export async function getAllUsers(): Promise<User[]> {
 
 export async function registroUsuario(event: Evento) {
   console.log("registroUsuario");
+  const data: any = (event as any).payload ?? event;
   guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
-    email: event.payload.correo
+    email: data.correo
   },
   message: {
     email: UtilidadesService.renderTemplate("registration_confirmation.html", {
-      usuario: event.payload.usuario,
-      correo: event.payload.correo
+      usuario: data.usuario,
+      correo: data.correo
     })
   },
   subject: MessageTemplates.SUBJECT_REGISTRATION
@@ -90,22 +91,23 @@ export async function registroUsuario(event: Evento) {
 
 export async function autenticacion(event: Evento) {
   console.log("autenticacion");
+  const data: any = (event as any).payload ?? event;
   guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
-    email: event.payload.correo,
-    sms: event.payload.numeroTelefono
+    email: data.correo,
+    sms: data.numeroTelefono
   },
   message: {
     email: UtilidadesService.renderTemplate("security_alert.html", {
-      usuario: event.payload.usuario,
-      correo: event.payload.correo,
-      fecha: formatearFechaGeneral(event.payload.fecha)
+      usuario: data.usuario,
+      correo: data.correo,
+      fecha: formatearFechaGeneral(data.fecha)
     }),
     sms: UtilidadesService.renderStringTemplate(MessageTemplates.LOGIN_MESSAGE, {
-      usuario: event.payload.usuario,
-      correo: event.payload.correo,
-      fecha: formatearFechaGeneral(event.payload.fecha)
+      usuario: data.usuario,
+      correo: data.correo,
+      fecha: formatearFechaGeneral(data.fecha)
     })
   },
   subject: MessageTemplates.SUBJECT_LOGIN
@@ -114,16 +116,17 @@ export async function autenticacion(event: Evento) {
 
 export async function recuperacionContrasena(event: Evento) {
   console.log("recuperacionContrasena");
+  const data: any = (event as any).payload ?? event;
   guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
-    email: event.payload.correo
+    email: data.correo
   },
   message: {
     email: UtilidadesService.renderTemplate("change_request.html", {
-      usuario: event.payload.usuario,
-      correo: event.payload.correo,
-      codigo: event.payload.codigo
+      usuario: data.usuario,
+      correo: data.correo,
+      codigo: data.codigo
     })
   },
   subject: MessageTemplates.SUBJECT_PASSWORD_CHANGE_REQUEST
@@ -132,22 +135,23 @@ export async function recuperacionContrasena(event: Evento) {
 
 export async function autenticacionClaves(event: Evento) {
   console.log("autenticacionClaves");
+  const data: any = (event as any).payload ?? event;
   guardarEvento(event);
   await publishMessage("notifications.queue", {
     destination: {
-    email: event.payload.correo,
-    sms: event.payload.numeroTelefono
+    email: data.correo,
+    sms: data.numeroTelefono
   },
   message: {
     email: UtilidadesService.renderTemplate("system_notification.html", {
-      usuario: event.payload.usuario,
-      correo: event.payload.correo,
-      fecha: formatearFechaGeneral(event.payload.fecha)
+      usuario: data.usuario,
+      correo: data.correo,
+      fecha: formatearFechaGeneral(data.fecha)
     }),
     sms: UtilidadesService.renderStringTemplate(MessageTemplates.PASSWORD_CHANGE_MESSAGE, {
-      usuario: event.payload.usuario,
-      correo: event.payload.correo,
-      fecha: formatearFechaGeneral(event.payload.fecha)
+      usuario: data.usuario,
+      correo: data.correo,
+      fecha: formatearFechaGeneral(data.fecha)
     })
   },
   subject: MessageTemplates.SUBJECT_PASSWORD_CHANGE
@@ -155,8 +159,9 @@ export async function autenticacionClaves(event: Evento) {
 }
 
 export async function guardarEvento(evt: Evento) {
-  console.log(evt.payload);
-  const { usuario, correo, numeroTelefono, codigo, fecha } = evt.payload;
+  const payloadData: any = (evt as any).payload ?? evt;
+  console.log(payloadData);
+  const { usuario, correo, numeroTelefono, codigo, fecha } = payloadData;
   let fechaDate;
   if (fecha !== undefined && fecha !== null) {
     const parsed = new Date(fecha);
@@ -168,7 +173,7 @@ export async function guardarEvento(evt: Evento) {
     }
   }
   
-  const data = {
+  const record = {
     id: evt.id,
     tipoAccion: evt.tipoAccion,
     timestamp: evt.timestamp,
@@ -180,6 +185,6 @@ export async function guardarEvento(evt: Evento) {
   };
 
   // Llamada al repo
-  const saved = await repo.createEvento(data);
+  const saved = await repo.createEvento(record);
   return saved;
 }
