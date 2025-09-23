@@ -162,6 +162,18 @@ export async function guardarEvento(evt: Evento) {
   const payloadData: any = (evt as any).payload ?? evt;
   console.log(payloadData);
   const { usuario, correo, numeroTelefono, codigo, fecha } = payloadData;
+
+  // Normalizar timestamp como String ISO si viene numérico (según hallazgo Prisma)
+  let timestampNorm: string;
+  if (typeof (evt as any).timestamp === "number") {
+    // viene como epoch seconds, convertir a ISO
+    const ms = ((evt as any).timestamp as number) * 1000;
+    timestampNorm = new Date(ms).toISOString();
+  } else if (typeof (evt as any).timestamp === "string") {
+    timestampNorm = (evt as any).timestamp as string;
+  } else {
+    timestampNorm = new Date().toISOString();
+  }
   let fechaDate;
   if (fecha !== undefined && fecha !== null) {
     const parsed = new Date(fecha);
@@ -176,7 +188,7 @@ export async function guardarEvento(evt: Evento) {
   const record = {
     id: evt.id,
     tipoAccion: evt.tipoAccion,
-    timestamp: evt.timestamp,
+    timestamp: timestampNorm,
     usuario,
     correo: undefinedToNull(correo),
     numeroTelefono: undefinedToNull(numeroTelefono),

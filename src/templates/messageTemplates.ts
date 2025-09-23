@@ -7,17 +7,11 @@ export class MessageTemplates {
 
   // Plantilla para ingreso/login
   static LOGIN_MESSAGE = 
-  "Hola {{usuario}}, se ha registrado un inicio de sesión en tu cuenta.\n" +
-  "Correo: {{correo}}\n" +
-  "Fecha: {{fecha}}\n\n" +
-  "Si no reconoces esta actividad, cambia tu contraseña inmediatamente.";
+  "Login: {{usuario}}. Fecha: {{fecha}}. Si no fuiste tú, cambia tu contraseña.";
 
 
   // Plantilla para cambio de contraseña
   static PASSWORD_CHANGE_MESSAGE =
-  "Hola {{usuario}}, tu contraseña fue cambiada exitosamente el {{fecha}}.\n" +
-  "Correo: {{correo}}\n" +
-  "Usuario: {{usuario}}\n\n" +
-  "Si no fuiste tú, restablece tu contraseña de inmediato y contacta a soporte.";
+  "Clave cambiada para {{usuario}} el {{fecha}}. Si no fuiste tú, restablécela.";
 
 }
