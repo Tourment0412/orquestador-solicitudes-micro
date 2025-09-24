@@ -30,4 +30,6 @@ model Evento {
   numeroTelefono String?
   codigo        String?
   fecha         DateTime?
+  
+  @@map("eventos")
 }
