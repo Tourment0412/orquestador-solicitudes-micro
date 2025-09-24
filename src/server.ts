@@ -14,10 +14,19 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use("/api/users", userRoutes);
+app.use("/api/v1/users", userRoutes);
 
 // health
 app.get("/health", (req: Request, res: Response) => res.json({ ok: true }));
+
+// Endpoints de notificaciones (RESTful)
+app.post("/api/v1/notifications", (req: Request, res: Response) => {
+  res.json({ message: "Endpoint de notificaciones - implementar lógica de orquestación" });
+});
+
+app.post("/api/v1/notifications/multi", (req: Request, res: Response) => {
+  res.json({ message: "Endpoint de notificaciones multi-canal - implementar lógica de orquestación" });
+});
 
 // global error handler
 app.use(errorHandler);
