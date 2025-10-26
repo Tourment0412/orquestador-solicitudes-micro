@@ -13,24 +13,76 @@ dotenv.config();
 
 const app = express();
 
+// Track start time for uptime calculation
+const START_TIME = new Date();
+
 app.use(pinoHttp({
   logger,
   redact: { paths: ['req.headers.authorization', 'password', 'token'], remove: true },
   genReqId: (req) => req.headers['x-request-id'] as string || Math.random().toString(16).slice(2)
 }));
 
-// ejemplo de log de negocio
-app.get('/health', (req, res) => {
-  req.log.info({ component: 'health' }, 'health_checked');
-  res.json({ status: 'ok' });
-});
-
 app.use(express.json());
 
-app.use("/api/v1/users", userRoutes);
+// Health check endpoints
+app.get('/health', (req: Request, res: Response) => {
+  const uptimeSeconds = Math.floor((Date.now() - START_TIME.getTime()) / 1000);
+  res.json({
+    status: 'UP',
+    version: '1.0.0',
+    uptime: uptimeSeconds,
+    checks: [
+      {
+        name: 'Application',
+        status: 'UP',
+        data: {
+          from: START_TIME.toISOString(),
+          status: 'RUNNING'
+        }
+      }
+    ]
+  });
+});
 
-// health
-app.get("/health", (req: Request, res: Response) => res.json({ ok: true }));
+app.get('/health/ready', (req: Request, res: Response) => {
+  const uptimeSeconds = Math.floor((Date.now() - START_TIME.getTime()) / 1000);
+  
+  // For readiness, check critical dependencies (RabbitMQ, Database)
+  // TODO: Add actual health checks for RabbitMQ and DB
+  const isReady = true; // Placeholder
+  
+  res.status(isReady ? 200 : 503).json({
+    status: isReady ? 'UP' : 'DOWN',
+    checks: [
+      {
+        data: {
+          from: START_TIME.toISOString(),
+          status: 'READY'
+        },
+        name: 'Readiness check',
+        status: isReady ? 'UP' : 'DOWN'
+      }
+    ]
+  });
+});
+
+app.get('/health/live', (req: Request, res: Response) => {
+  res.json({
+    status: 'UP',
+    checks: [
+      {
+        data: {
+          from: START_TIME.toISOString(),
+          status: 'ALIVE'
+        },
+        name: 'Liveness check',
+        status: 'UP'
+      }
+    ]
+  });
+});
+
+app.use("/api/v1/users", userRoutes);
 
 // Endpoints de notificaciones (RESTful)
 app.post("/api/v1/notifications", (req: Request, res: Response) => {
