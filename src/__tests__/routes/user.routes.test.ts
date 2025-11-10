@@ -143,7 +143,11 @@ describe('User Routes Integration Tests', () => {
     });
 
     it('should return JSON content type', async () => {
+<<<<<<< HEAD
       const mockUsers: any[] = [];
+=======
+      const mockUsers = [];
+>>>>>>> a383e65c9f949cfba986ee4e7c05ec26d25a8d6d
 
       (userController.listUsersHandler as jest.Mock).mockImplementation((req, res) => {
         res.status(200).json(mockUsers);
