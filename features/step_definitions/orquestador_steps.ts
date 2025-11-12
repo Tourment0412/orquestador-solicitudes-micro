@@ -14,7 +14,6 @@ Given('que el servicio orquestador está disponible', async function() {
     }
   } catch (error: any) {
     // Si hay error de conexión, el servicio no está disponible
-    // En un entorno real esto debería fallar, pero para tests locales lo permitimos
   }
 });
 

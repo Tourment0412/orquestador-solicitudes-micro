@@ -53,6 +53,8 @@ app.get('/health/ready', (req: Request, res: Response) => {
   
   res.status(isReady ? 200 : 503).json({
     status: isReady ? 'UP' : 'DOWN',
+    version: '1.0.0',
+    uptime: uptimeSeconds,
     checks: [
       {
         data: {
@@ -67,8 +69,12 @@ app.get('/health/ready', (req: Request, res: Response) => {
 });
 
 app.get('/health/live', (req: Request, res: Response) => {
+  const uptimeSeconds = Math.floor((Date.now() - START_TIME.getTime()) / 1000);
+  
   res.json({
     status: 'UP',
+    version: '1.0.0',
+    uptime: uptimeSeconds,
     checks: [
       {
         data: {
