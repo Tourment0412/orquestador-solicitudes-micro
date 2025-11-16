@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "test:acceptance": "cucumber-js",
+    "test:acceptance": "DATABASE_URL=postgresql://user:pass@localhost:5434/mydb?schema=public cucumber-js",
     "test:watch": "jest --watch",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "worker:dev": "ts-node-dev --respawn --transpile-only src/worker.ts",

@@ -1,0 +1,1091 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;crear-un-nuevo-usuario-a-través-del-orquestador",
+        "keyword": "Escenario",
+        "line": 12,
+        "name": "Crear un nuevo usuario a través del orquestador",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 3518529
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70804243
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 13,
+            "name": "creo un usuario con datos válidos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:119"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 14275424
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 14,
+            "name": "la respuesta debe tener estado 201",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 504257
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 15,
+            "name": "el cuerpo debe contener los datos del usuario creado",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:194"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 134438
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 356942
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;listar-usuarios-existentes",
+        "keyword": "Escenario",
+        "line": 18,
+        "name": "Listar usuarios existentes",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 175094
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4644655
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 19,
+            "name": "que existe al menos un usuario creado",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4576447
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 20,
+            "name": "consulto la lista de usuarios",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4276437
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 21,
+            "name": "la respuesta debe tener estado 200",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 177236
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 22,
+            "name": "el cuerpo debe contener una lista de usuarios",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:203"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 237554
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 431841
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;verificar-salud-del-servicio-orquestador",
+        "keyword": "Escenario",
+        "line": 25,
+        "name": "Verificar salud del servicio orquestador",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 142741
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4365130
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 26,
+            "name": "consulto el endpoint de health check",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:169"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4129179
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 27,
+            "name": "la respuesta debe tener estado 200",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 181015
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 28,
+            "name": "el cuerpo debe indicar que el servicio está UP",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:212"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 378176
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 139917
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;procesar-evento-de-registro-de-usuario",
+        "keyword": "Escenario",
+        "line": 31,
+        "name": "Procesar evento de registro de usuario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 113739
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4641945
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 32,
+            "name": "que el servicio orquestador está escuchando eventos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63783534
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 33,
+            "name": "se publica un evento \"REGISTRO_USUARIO\" en RabbitMQ",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:247"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2094207481
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 34,
+            "name": "el orquestador debe procesarlo correctamente",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:329"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 78412688
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 35,
+            "name": "debe publicar una notificación en la cola de notificaciones",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:360"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2051556967
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 36,
+            "name": "el evento debe guardarse en la base de datos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:436"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 571771
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 126683
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;procesar-evento-de-autenticación",
+        "keyword": "Escenario",
+        "line": 38,
+        "name": "Procesar evento de autenticación",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 123897
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6666589
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 39,
+            "name": "que el servicio orquestador está escuchando eventos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50312742
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 40,
+            "name": "se publica un evento \"AUTENTICACION\" en RabbitMQ",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:247"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2092531020
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 41,
+            "name": "el orquestador debe procesarlo correctamente",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:329"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41885584
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 42,
+            "name": "debe publicar notificaciones multi-canal (email y SMS)",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:455"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2067468021
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 155484
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;procesar-evento-de-recuperación-de-contraseña",
+        "keyword": "Escenario",
+        "line": 44,
+        "name": "Procesar evento de recuperación de contraseña",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94252
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5822143
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 45,
+            "name": "que el servicio orquestador está escuchando eventos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 53941999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 46,
+            "name": "se publica un evento \"RECUPERAR_PASSWORD\" en RabbitMQ",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:247"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2095499653
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 47,
+            "name": "el orquestador debe procesarlo correctamente",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:329"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 34112381
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 48,
+            "name": "debe generar un código de verificación",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:577"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 404800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 49,
+            "name": "debe publicar una notificación con el código",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:596"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4065775346
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 153009
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;procesar-evento-de-cambio-de-contraseña",
+        "keyword": "Escenario",
+        "line": 51,
+        "name": "Procesar evento de cambio de contraseña",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 150720
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8128855
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 52,
+            "name": "que el servicio orquestador está escuchando eventos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:226"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54199554
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 53,
+            "name": "se publica un evento \"AUTENTICACION_CLAVES\" en RabbitMQ",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:247"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2090525748
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 54,
+            "name": "el orquestador debe procesarlo correctamente",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:329"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 35970381
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 55,
+            "name": "debe publicar notificaciones multi-canal (email y SMS)",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:455"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2060912644
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 166560
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;publicar-mensaje-en-cola-de-notificaciones",
+        "keyword": "Escenario",
+        "line": 58,
+        "name": "Publicar mensaje en cola de notificaciones",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 107995
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4886673
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 59,
+            "name": "el orquestador publica un mensaje en \"notifications.queue\"",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:703"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 592578039
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 60,
+            "name": "el mensaje debe enviarse correctamente",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:749"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51515998
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 61,
+            "name": "debe tener formato JSON válido",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:780"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3467684
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 62,
+            "name": "debe ser persistente",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:806"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49982951
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 129709
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;renderizar-plantilla-html-de-email",
+        "keyword": "Escenario",
+        "line": 65,
+        "name": "Renderizar plantilla HTML de email",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 124411
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4780214
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 66,
+            "name": "se solicita renderizar \"registration_confirmation.html\"",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:828"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 503146
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 67,
+            "name": "se proporcionan datos del usuario",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:843"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 382812
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 68,
+            "name": "debe retornar HTML con los datos interpolados",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:857"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 58533167
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 102310
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;renderizar-plantilla-de-mensaje-sms",
+        "keyword": "Escenario",
+        "line": 70,
+        "name": "Renderizar plantilla de mensaje SMS",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 141077
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3661038
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 71,
+            "name": "se solicita renderizar una plantilla de texto",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:887"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8421109
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 72,
+            "name": "se proporcionan datos del evento",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:904"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 758276
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 73,
+            "name": "debe retornar texto con variables reemplazadas",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:915"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2727423
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 115342
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;guardar-evento-procesado-en-la-base-de-datos",
+        "keyword": "Escenario",
+        "line": 76,
+        "name": "Guardar evento procesado en la base de datos",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 79839
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4640370
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 77,
+            "name": "se procesa un evento válido",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:945"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 326884242
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 78,
+            "name": "el evento debe guardarse en la tabla \"eventos\"",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:968"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 31787447
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 79,
+            "name": "debe incluir todos los campos requeridos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:997"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 765423
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 80,
+            "name": "debe tener un ID único",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:1012"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 294125
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 82268
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "orquestación-de-solicitudes-y-eventos;iniciar-worker-de-procesamiento",
+        "keyword": "Escenario",
+        "line": 83,
+        "name": "Iniciar worker de procesamiento",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 68267
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 9,
+            "name": "que el servicio orquestador está disponible",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3317717
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 84,
+            "name": "el worker se inicia correctamente",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:1029"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49986279
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 85,
+            "name": "debe conectarse a RabbitMQ",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:1045"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 230230
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 86,
+            "name": "debe comenzar a consumir de \"orquestador.queue\"",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:1056"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48685168
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 87,
+            "name": "debe estar listo para procesar eventos",
+            "match": {
+              "location": "features/step_definitions/orquestador_steps.ts:1080"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1122014592
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 114650
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "orquestación-de-solicitudes-y-eventos",
+    "line": 6,
+    "keyword": "Característica",
+    "name": "Orquestación de Solicitudes y Eventos",
+    "tags": [],
+    "uri": "features/orquestador.feature"
+  }
+]
